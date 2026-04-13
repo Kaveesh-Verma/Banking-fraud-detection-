@@ -1,0 +1,15 @@
+{
+  "prettier": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "node_modules
+dist
+build
+.next
+coverage
+.venv
+venv
+.env*
+*.lock
+*.log
