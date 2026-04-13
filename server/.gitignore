@@ -13,6 +13,9 @@ dist/
 .env
 .env.local
 
+# Local database
+finshield.db
+
 # Logs
 *.log
 logs/
