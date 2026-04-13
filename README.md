@@ -89,6 +89,34 @@ The app will open at: http://localhost:5173
 
 ---
 
+## Quick Local Run Commands
+
+Use these exact commands from PowerShell to start the app locally:
+
+```powershell
+cd "c:\Users\Kaveesh Verma\Downloads\finshield-ai-standalone\finshield-standalone\server"
+npm install
+npm run dev
+```
+
+Open a second terminal:
+
+```powershell
+cd "c:\Users\Kaveesh Verma\Downloads\finshield-ai-standalone\finshield-standalone\client"
+npm install
+npm run dev
+```
+
+Then open the app in your browser:
+
+```powershell
+Start-Process "http://localhost:5174"
+```
+
+If port `5173` is already in use, Vite will automatically try another port like `5174`.
+
+---
+
 ## Routes
 
 | Page | URL |
