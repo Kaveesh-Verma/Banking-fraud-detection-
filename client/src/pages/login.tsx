@@ -147,7 +147,11 @@ export default function Login() {
     setBiometricLoading(true);
     const ok = await registerBiometric(pendingData?.mobile ?? "user");
     setBiometricLoading(false);
-    if (ok) toast({ title: "Biometric registered!", description: "You can now login with biometrics next time." });
+    if (ok) {
+      toast({ title: "Biometric registered!", description: "You can now login with biometrics next time." });
+    } else {
+      toast({ title: "Biometric setup failed", description: "Skipping biometric setup.", variant: "destructive" });
+    }
     await createSession();
   }
 
