@@ -12,13 +12,19 @@ function calcRisk(s: typeof sessionsTable.$inferSelect) {
   return { score, level: score < 30 ? "low" : score <= 60 ? "medium" : "high", reasons };
 }
 
+function toDate(value: unknown): Date {
+  if (value instanceof Date) return value;
+  if (typeof value === "number") return new Date(value * 1000);
+  return new Date(String(value));
+}
+
 router.get("/admin/sessions", async (_req, res): Promise<void> => {
   const sessions = await db.select().from(sessionsTable).orderBy(sessionsTable.createdAt);
   res.json(sessions.map(s => {
     const { score, level, reasons } = calcRisk(s);
     return {
       id: s.id, name: s.name, mobile: s.mobile,
-      loginTime: s.loginTime.toISOString(),
+      loginTime: toDate(s.loginTime).toISOString(),
       deviceInfo: { os: s.os, browser: s.browser, deviceType: s.deviceType, userAgent: s.userAgent },
       locationPermission: s.locationPermission,
       latitude: s.latitude ?? null,
@@ -32,7 +38,7 @@ router.get("/admin/sessions", async (_req, res): Promise<void> => {
       riskScore: score,
       riskLevel: level,
       riskReasons: reasons,
-      createdAt: s.createdAt.toISOString(),
+      createdAt: toDate(s.createdAt).toISOString(),
     };
   }));
 });
